@@ -13,14 +13,16 @@ import org.greenrobot.greendao.database.Database;
  */
 public class BaseApplication extends Application {
     private static DaoSession mDaoSession;
+    private static Context sContext;
     @Override
     public void onCreate() {
         super.onCreate();
-
+        setupDataBase(this);
+        sContext = getApplicationContext();
     }
 
     private void setupDataBase(Context context){
-        DaoMaster.DevOpenHelper openHelper = new DaoMaster.DevOpenHelper(context,"UserTable");
+        DaoMaster.DevOpenHelper openHelper = new DaoMaster.DevOpenHelper(context,"user-table");
         Database db = openHelper.getWritableDb();
         DaoMaster daoMaster = new DaoMaster(db);
         mDaoSession = daoMaster.newSession();
@@ -28,5 +30,9 @@ public class BaseApplication extends Application {
 
     public static DaoSession getmDaoSession(){
         return mDaoSession;
+    }
+
+    public static Context getContext(){
+        return sContext;
     }
 }

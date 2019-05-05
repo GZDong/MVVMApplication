@@ -24,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         mBinding.setUser(new MainModel("john",25,"http://img2.cache.netease.com/auto/2016/7/28/201607282215432cd8a.jpg"));  //model  ->  view
-        User user = new User(1l,20,"john");
+        User user = new User(null,20,"john");
         mDaoSession = BaseApplication.getmDaoSession();
+        addUser(user);
+
     }
 
     public void onItemClick(View view) {
